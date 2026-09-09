@@ -1,0 +1,20 @@
+.submit-post {
+  background-color: rgba(16, 124, 173);
+  color: white;
+}
+
+.submit-comment {
+  background-color: rgba(16, 124, 173);
+  color: white;
+}
+
+button {
+  border-color: brown;
+  border-width: 15px;
+
+}
+
+.submit-post {
+  background-color: rgba(16, 124, 173);
+  color: white;
+}
