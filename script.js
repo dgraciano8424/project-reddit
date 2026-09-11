@@ -14,6 +14,9 @@ let commentText = document.getElementsByClassName("commentInputText")[0];
 // * comment name input
 let commentName = document.getElementsByClassName("commentInputName")[0];
 
+// * Stored Post index
+let selectedPostIndex;
+
 // * not sure if I need
 let allPostArr = [];
 
@@ -35,20 +38,30 @@ let postList = document.getElementsByClassName("postList")[0];
 // * Remove Button
 let contentContainer = document.getElementsByClassName("contentContainer")[0];
 
+// * // * Remove Button Container
+// * let removeDiv = document.getElementsByClassName("remove");
+
 contentContainer.addEventListener("click", function (e) {
-  if (e.target.closest(".remove")) {
-  }
+  // * if (e.target.closest(".comment")) {
+
+  // * }
+  console.log(e.target);
 });
+
+// * Comment button
+// * let commentBTN = comment.addEventListener("click", function (e) {
+// *   selectedPostIndex = e.target.dataset.index;
+// * });
 
 // * Submit Comment button
 let subComBTN = submitComment.addEventListener("click", function () {
+  console.log(selectedPostIndex);
   let comment = {
     text: commentText.value,
-    name: commentName.value,
-    comments: comArr,
+    name: commentName.value
   };
 
-  comArr.push(comment);
+  postArr[selectedPostIndex].comments.push(comment);
   commentText.value = "";
   commentName.value = "";
   renderPost();
@@ -60,7 +73,7 @@ let subPostBTN = submitPost.addEventListener("click", function () {
   let post = {
     text: postText.value,
     name: postName.value,
-    comments: postArr,
+    comments: []
   };
 
   postArr.push(post);
@@ -73,18 +86,45 @@ let renderPost = function () {
   // * Comment Loop
   commentList.innerHTML = "";
 
-  let commentsHTML = "";
   for (var i = 0; i < comArr.length; i++) {
     commentsHTML +=
-      "<div>" + "<button class='remove' data-name= + "'" + comment-index  + "'" + > + "remove " + " </button>" + " <button> </button>" + comArr[i].text + "  Posted by:  " + comArr[i].name + "</div>";
+      "<div class='remove>" +
+      "<button class='remove' data-index='" +
+      i +
+      "'>Remove</button>" +
+      "remove " +
+      "<button class='comment' data-index='" +
+      i +
+      "'>Comment</button>" +
+      comArr[i].text +
+      "  Posted by:  " +
+      comArr[i].name +
+      "</div>";
   }
+
+  let commentsHTML = "";
+  // *  needs to be fixed both set empty strings
+
   commentList.innerHTML = commentsHTML;
 
   // * Post loop
   let postHTML = "";
 
   for (var i = 0; i < postArr.length; i++) {
-    postHTML += "<div>" + " <button> </button>" + " <button> </button>" + postArr[i].text + "  Posted by:  " + postArr[i].name + "</div>";
+    postHTML +=
+      "<div>" +
+      "<button class='comment' data-index='" +
+      i +
+      "'>Remove</button>" +
+      "<button class='comment' data-index='" +
+      i +
+      "'>Comment</button>" +
+      "<div class='text'>" +
+      postArr[i].text +
+      "  Posted by:  " +
+      postArr[i].name +
+      "</div>";
+    ("</div>");
   }
   postList.innerHTML = postHTML;
 };
