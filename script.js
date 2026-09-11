@@ -1,6 +1,3 @@
-// * let postLine = `${postArr.text} - Posted By: ${postArr.name}`;
-// * let commentLine = `${comArr.text} - Posted By: ${comArr.name}`;
-
 let submitComment = document.getElementsByClassName("submit-comment")[0];
 
 let submitPost = document.getElementsByClassName("submit-post")[0];
@@ -16,9 +13,6 @@ let commentName = document.getElementsByClassName("commentInputName")[0];
 
 // * Stored Post index
 let selectedPostIndex;
-
-// * not sure if I need
-let allPostArr = [];
 
 // * holds comments
 let comArr = [];
@@ -38,13 +32,7 @@ let postList = document.getElementsByClassName("postList")[0];
 // * Remove Button
 let contentContainer = document.getElementsByClassName("contentContainer")[0];
 
-// * // * Remove Button Container
-// * let removeDiv = document.getElementsByClassName("remove");
-
 contentContainer.addEventListener("click", function (e) {
-  // * if (e.target.closest(".comment")) {
-
-  // * }
   console.log(e.target);
 });
 
@@ -58,7 +46,7 @@ let subComBTN = submitComment.addEventListener("click", function () {
   console.log(selectedPostIndex);
   let comment = {
     text: commentText.value,
-    name: commentName.value
+    name: commentName.value,
   };
 
   postArr[selectedPostIndex].comments.push(comment);
@@ -69,11 +57,10 @@ let subComBTN = submitComment.addEventListener("click", function () {
 
 // * Submit Post button
 let subPostBTN = submitPost.addEventListener("click", function () {
-  console.log(postText, "hello");
   let post = {
     text: postText.value,
     name: postName.value,
-    comments: []
+    comments: [],
   };
 
   postArr.push(post);
