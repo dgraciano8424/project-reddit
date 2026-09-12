@@ -14,9 +14,6 @@ let commentName = document.getElementsByClassName("commentInputName")[0];
 // * Stored Post index
 let selectedPostIndex;
 
-// * holds comments
-let comArr = [];
-
 // * holds posts
 let postArr = [];
 
@@ -29,89 +26,87 @@ let postName = document.getElementsByClassName("postInputName")[0];
 // * Post Container
 let postList = document.getElementsByClassName("postList")[0];
 
-// * Remove Button
+// * Container holding all clicks
 let contentContainer = document.getElementsByClassName("contentContainer")[0];
 
-contentContainer.addEventListener("click", function (e) {
-  console.log(e.target);
+postList.addEventListener("click", function (e) {
+  // * Comment Button
+
+  if (e.target.classList.contains("comment")) {
+    selectedPostIndex = Number(e.target.dataset.index);
+
+    console.log("Selected Post:", selectedPostIndex);
+  }
+
+  // * Remove Button
+
+  if (e.target.classList.contains("remove")) {
+    let index = Number(e.target.dataset.index);
+
+    postArr.splice(index, 1);
+
+    renderPost();
+  }
 });
 
-// * Comment button
-// * let commentBTN = comment.addEventListener("click", function (e) {
-// *   selectedPostIndex = e.target.dataset.index;
-// * });
-
-// * Submit Comment button
-let subComBTN = submitComment.addEventListener("click", function () {
-  console.log(selectedPostIndex);
+submitComment.addEventListener("click", function (e) {
   let comment = {
     text: commentText.value,
-    name: commentName.value,
+    name: commentName.value
   };
 
   postArr[selectedPostIndex].comments.push(comment);
+
   commentText.value = "";
+
   commentName.value = "";
+
   renderPost();
 });
 
-// * Submit Post button
-let subPostBTN = submitPost.addEventListener("click", function () {
+submitPost.addEventListener("click", function () {
   let post = {
     text: postText.value,
     name: postName.value,
-    comments: [],
+    comments: []
   };
 
   postArr.push(post);
+
   postText.innerHTML = "";
   postName.innerHTML = "";
+
   renderPost();
 });
 
 let renderPost = function () {
-  // * Comment Loop
-  commentList.innerHTML = "";
-
-  for (var i = 0; i < comArr.length; i++) {
-    commentsHTML +=
-      "<div class='remove>" +
-      "<button class='remove' data-index='" +
-      i +
-      "'>Remove</button>" +
-      "remove " +
-      "<button class='comment' data-index='" +
-      i +
-      "'>Comment</button>" +
-      comArr[i].text +
-      "  Posted by:  " +
-      comArr[i].name +
-      "</div>";
-  }
-
-  let commentsHTML = "";
-  // *  needs to be fixed both set empty strings
-
-  commentList.innerHTML = commentsHTML;
-
-  // * Post loop
   let postHTML = "";
 
   for (var i = 0; i < postArr.length; i++) {
+    let commentsHTML = "";
+
+    postArr[i].comments.forEach(function (comment) {
+      commentsHTML += "<div>" + comment.text + " - Posted by: " + comment.name + "</div>";
+    });
+
     postHTML +=
       "<div>" +
-      "<button class='comment' data-index='" +
+      "<button class='remove' data-index='" +
       i +
       "'>Remove</button>" +
       "<button class='comment' data-index='" +
       i +
-      "'>Comment</button>" +
+      "'>Comments</button>" +
       "<div class='text'>" +
       postArr[i].text +
-      "  Posted by:  " +
+      " - Posted by: " +
       postArr[i].name +
+      "</div>" +
+      "<div class='comments'>" +
+      commentsHTML +
+      "</div>" +
       "</div>";
-    ("</div>");
   }
+
   postList.innerHTML = postHTML;
 };
