@@ -1,5 +1,0 @@
-# Ignore secret environment variables
-.env
-
-# Ignore downloaded Node packages (if using Node)
-node_modules/
