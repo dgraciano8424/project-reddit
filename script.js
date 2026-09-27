@@ -48,7 +48,7 @@ postList.addEventListener("click", function (e) {
     selectedPostIndex = undefined;
   }
 });
-
+// * slightly used AI to give me this part. Everything else I only had it teach me. Never give answers.
 submitComment.addEventListener("click", function (e) {
   if (selectedPostIndex === undefined) {
     alert("You need to click the post you want to comment on!!!!!!!!");
@@ -58,6 +58,8 @@ submitComment.addEventListener("click", function (e) {
     alert("you need to put something in the comment Text and Your Name field!!~!~!~!~!~!~!~~~!#%%^%@");
     return;
   }
+
+  // *
 
   let comment = {
     text: commentText.value,
