@@ -44,17 +44,27 @@ postList.addEventListener("click", function (e) {
     let index = Number(e.target.dataset.index);
 
     postArr.splice(index, 1);
-
     renderPost();
+    selectedPostIndex = undefined;
   }
 });
 
 submitComment.addEventListener("click", function (e) {
+  if (selectedPostIndex === undefined) {
+    alert("You need to click the post you want to comment on!!!!!!!!");
+    return;
+  }
+  if (commentText.value.trim() === "" || commentName.value.trim() === "") {
+    alert("you need to put something in the comment Text and Your Name field!!~!~!~!~!~!~!~~~!#%%^%@");
+    return;
+  }
+
   let comment = {
     text: commentText.value,
     name: commentName.value
   };
 
+  console.log("submit comment clicked", selectedPostIndex);
   postArr[selectedPostIndex].comments.push(comment);
 
   commentText.value = "";
@@ -65,6 +75,10 @@ submitComment.addEventListener("click", function (e) {
 });
 
 submitPost.addEventListener("click", function () {
+  if (postText.value.trim() == "" || postName.value.trim() == "") {
+    alert("you need to put something in the Post Text and Your Name field!!~!~!~!~!~!~!~~~!#%%^%@");
+    return;
+  }
   let post = {
     text: postText.value,
     name: postName.value,
@@ -73,8 +87,8 @@ submitPost.addEventListener("click", function () {
 
   postArr.push(post);
 
-  postText.innerHTML = "";
-  postName.innerHTML = "";
+  postText.value = "";
+  postName.value = "";
 
   renderPost();
 });
@@ -107,6 +121,5 @@ let renderPost = function () {
       "</div>" +
       "</div>";
   }
-
   postList.innerHTML = postHTML;
 };
